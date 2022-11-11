@@ -57,11 +57,11 @@ void calc_cost(calculations* calc, vec& Vmass, Matr& calc_mass) {
 	}
 }
 
-cases file_loading(String File, calculations* Date) {
-	if (File.Trim().IsEmpty())
+cases file_loading(String file, calculations* data) {
+	if (file.Trim().IsEmpty())
 		return false_func_st;
 	fstream file;
-	file.open(AnsiString(File).c_str(), std::ios_base::in | std::ios_base::binary);
+	file.open(AnsiString(file).c_str(), std::ios_base::in | std::ios_base::binary);
 	if (!file.is_open())
 		return open_error;
 	int L;
@@ -76,7 +76,7 @@ cases file_loading(String File, calculations* Date) {
 		return false_data;
 	}
 	try {
-		(Date->coeff_b).Length = L;
+		(data->coeff_b).Length = L;
 	}
 	catch (...) {
 		file.close();
@@ -84,48 +84,48 @@ cases file_loading(String File, calculations* Date) {
 	}
 	file.clear();
 	file.seekg(sizeof(int));
-	file.read((char*)&(Date->cost_per_km), sizeof(elem_type));
-	file.read((char*)&(Date->fixed_price), sizeof(elem_type));
-	file.read((char*)&(Date->q), sizeof(elem_type));
-	file.read((char*)&(Date->coeff_y), sizeof(elem_type));
-	file.read((char*)&(Date->summ_l), sizeof(elem_type));
-	file.read((char*)&(Date->time), sizeof(elem_type));
-	file.read((char*)&(Date->v_min), sizeof(elem_type));
-	file.read((char*)&(Date->v_max), sizeof(elem_type));
-	file.read((char*)&(Date->step), sizeof(elem_type));
-	file.read((char*)&(Date->rub_k_ton), sizeof(elem_type));
-	file.read((char*)&(Date->rub_k_t_km), sizeof(elem_type));
+	file.read((char*)&(data->cost_per_km), sizeof(elem_type));
+	file.read((char*)&(data->fixed_price), sizeof(elem_type));
+	file.read((char*)&(data->q), sizeof(elem_type));
+	file.read((char*)&(data->coeff_y), sizeof(elem_type));
+	file.read((char*)&(data->summ_l), sizeof(elem_type));
+	file.read((char*)&(data->time), sizeof(elem_type));
+	file.read((char*)&(data->v_min), sizeof(elem_type));
+	file.read((char*)&(data->v_max), sizeof(elem_type));
+	file.read((char*)&(data->step), sizeof(elem_type));
+	file.read((char*)&(data->rub_k_ton), sizeof(elem_type));
+	file.read((char*)&(data->rub_k_t_km), sizeof(elem_type));
 	if (L)
-		file.read((char*)&(Date->coeff_b[0]), L * sizeof(elem_type));
+		file.read((char*)&(data->coeff_b[0]), L * sizeof(elem_type));
 
 	file.close();
 	return good;
 }
 
-cases save_file(String File, calculations* Date) {
-	if (File.IsEmpty())
+cases save_file(String file, calculations* data) {
+	if (file.IsEmpty())
 		return false_func_st;
 	fstream file;
-	file.open(AnsiString(File).c_str(), std::ios_base::out | std::ios_base::binary);
+	file.open(AnsiString(file).c_str(), std::ios_base::out | std::ios_base::binary);
 	if (!file.is_open())
 		return open_error;
 
-	int L = (Date->coeff_b).Length;
+	int L = (data->coeff_b).Length;
 	file.write((char*)&L, sizeof(int));
 
-	file.write((char*)&(Date->cost_per_km), sizeof(elem_type));
-	file.write((char*)&(Date->fixed_price), sizeof(elem_type));
-	file.write((char*)&(Date->q), sizeof(elem_type));
-	file.write((char*)&(Date->coeff_y), sizeof(elem_type));
-	file.write((char*)&(Date->summ_l), sizeof(elem_type));
-	file.write((char*)&(Date->time), sizeof(elem_type));
-	file.write((char*)&(Date->v_min), sizeof(elem_type));
-	file.write((char*)&(Date->v_max), sizeof(elem_type));
-	file.write((char*)&(Date->step), sizeof(elem_type));
-	file.write((char*)&(Date->rub_k_ton), sizeof(elem_type));
-	file.write((char*)&(Date->rub_k_t_km), sizeof(elem_type));
+	file.write((char*)&(data->cost_per_km), sizeof(elem_type));
+	file.write((char*)&(data->fixed_price), sizeof(elem_type));
+	file.write((char*)&(data->q), sizeof(elem_type));
+	file.write((char*)&(data->coeff_y), sizeof(elem_type));
+	file.write((char*)&(data->summ_l), sizeof(elem_type));
+	file.write((char*)&(data->time), sizeof(elem_type));
+	file.write((char*)&(data->v_min), sizeof(elem_type));
+	file.write((char*)&(data->v_max), sizeof(elem_type));
+	file.write((char*)&(data->step), sizeof(elem_type));
+	file.write((char*)&(data->rub_k_ton), sizeof(elem_type));
+	file.write((char*)&(data->rub_k_t_km), sizeof(elem_type));
 	if (L)
-		file.write((char*)&((Date->coeff_b)[0]), L * sizeof(elem_type));
+		file.write((char*)&((data->coeff_b)[0]), L * sizeof(elem_type));
 	file.close();
 	return good;
 }
