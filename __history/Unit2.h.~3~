@@ -1,0 +1,40 @@
+//---------------------------------------------------------------------------
+
+#ifndef Unit2H
+#define Unit2H
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <Vcl.Samples.Spin.hpp>
+#include <Vcl.Grids.hpp>
+//---------------------------------------------------------------------------
+class TForm2 : public TForm
+{
+__published:	// IDE-managed Components
+	TPanel *changing_pan;
+	TPanel *edit_pan;
+	TButton *add_col;
+	TButton *del_col;
+	TButton *insert_col;
+	TPanel *add_option_pan;
+	TLabel *font_size_l;
+	TLabel *rounding_l;
+	TCheckBox *auto_corr;
+	TSpinEdit *rouding_b;
+	TSpinEdit *font_size_b;
+	TCheckBox *graph_3d_on;
+	TPanel *grid;
+	TStringGrid *calcul_output;
+	TPanel *data;
+	TPanel *chart;
+private:	// User declarations
+public:		// User declarations
+	__fastcall TForm2(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TForm2 *Form2;
+//---------------------------------------------------------------------------
+#endif

@@ -1,0 +1,128 @@
+//---------------------------------------------------------------------------
+
+#pragma hdrstop
+
+#include "Unit1.h"
+#include <fstream>
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+void CalcCost (CalcVar *pStruct, Vec &Vmass, Matr &CalcMass) {
+
+	int countVt = 1;
+	int i = pStruct -> Vmin;
+	// Считаем количество элементов Vt
+	do{
+		i += pStruct->step;
+		countVt++;
+	}while(i < pStruct->Vmax);
+
+	try{
+		Vmass.Length = countVt;
+	}catch(...){
+		CalcMass.Length = 0;
+		Vmass.Length = 0;
+		return;
+	}
+
+	try{
+		CalcMass.Length = countVt;
+		for(int i = 0; i < Vmass.Length; i++)
+			CalcMass[i].Length = pStruct->CoefB.Length;
+	}catch(...){
+		return;
+	}
+	double V = pStruct->Vmin;
+	i = 0;
+	// Заполняем массив Vt
+	while(Vmass.Length != i) {
+		if(V > pStruct->Vmax){
+			Vmass[i]=pStruct->Vmax;
+			break;
+		}
+		Vmass[i]= V;
+		V += pStruct -> step;
+		i++;
+	}
+	// Заполняем массив CalcMass для каждого B
+	for(i = 0; i < Vmass.Length; i++){
+		for(int j = 0; j < pStruct->CoefB.Length; j++){
+			double TranspTime = pStruct->time + pStruct->averageL/(Vmass[i] *pStruct-> CoefB[j]);
+			CalcMass[i][j] = pStruct->varCost * Vmass[i]/
+				(pStruct->Q*pStruct->CoefY*pStruct->CoefB[j])
+					+ pStruct->fixCost*TranspTime/(pStruct->Q*pStruct ->CoefY)
+						+ (pStruct->FreightRate + pStruct->TranspRateKm*pStruct->averageL)*1.27;
+		}
+	}
+}
+
+Result LoadFrFile(String File, CalcVar *Date){
+	if(File.Trim().IsEmpty())
+		return IncorrFuncParams_st;
+	fstream file;
+	file.open(AnsiString(File).c_str(), std::ios_base::in | std::ios_base::binary);
+	if(!file.is_open())
+		return NotOpen_st;
+	int L;
+	file.read((char*)&L, sizeof(int));
+
+	file.seekg(0, std::ios::end);
+	int pos = file.tellg();
+	int NumbersByte = (int)pos - sizeof(int);
+	int ArrayByte = 11 * sizeof(tElem) + L * sizeof(tElem);
+	if(NumbersByte != ArrayByte){ ///проверка на соответствие
+		file.close();
+		return IncorrData_st;
+	}
+	try{
+		(Date -> CoefB).Length = L;
+	}catch(...){
+		file.close();
+		return ErrorAllocationDM_st;
+	}
+	file.clear();
+	file.seekg(sizeof(int));
+	file.read((char*)&(Date -> varCost), sizeof(tElem));
+	file.read((char*)&(Date -> fixCost), sizeof(tElem));
+	file.read((char*)&(Date -> Q), sizeof(tElem));
+	file.read((char*)&(Date -> CoefY), sizeof(tElem));
+	file.read((char*)&(Date -> averageL), sizeof(tElem));
+	file.read((char*)&(Date -> time), sizeof(tElem));
+	file.read((char*)&(Date -> Vmin), sizeof(tElem));
+	file.read((char*)&(Date -> Vmax), sizeof(tElem));
+	file.read((char*)&(Date -> step), sizeof(tElem));
+	file.read((char*)&(Date -> FreightRate), sizeof(tElem));
+	file.read((char*)&(Date -> TranspRateKm), sizeof(tElem));
+	if(L)
+		file.read((char*)&(Date -> CoefB[0]), L * sizeof(tElem));
+
+	file.close();
+	return Correct_st;
+}
+
+Result SaveToFile(String File, CalcVar *Date){
+	if(File.IsEmpty())
+		return IncorrFuncParams_st;
+	fstream file;
+	file.open(AnsiString(File).c_str(), std::ios_base::out | std::ios_base::binary);
+	if(!file.is_open())
+		return NotOpen_st;
+
+	int L = (Date -> CoefB).Length;
+	file.write((char*)&L, sizeof(int));
+
+	file.write((char*)&(Date -> varCost), sizeof(tElem));
+	file.write((char*)&(Date -> fixCost), sizeof(tElem));
+	file.write((char*)&(Date -> Q), sizeof(tElem));
+	file.write((char*)&(Date -> CoefY), sizeof(tElem));
+	file.write((char*)&(Date -> averageL), sizeof(tElem));
+	file.write((char*)&(Date -> time), sizeof(tElem));
+	file.write((char*)&(Date -> Vmin), sizeof(tElem));
+	file.write((char*)&(Date -> Vmax), sizeof(tElem));
+	file.write((char*)&(Date -> step), sizeof(tElem));
+	file.write((char*)&(Date -> FreightRate), sizeof(tElem));
+	file.write((char*)&(Date -> TranspRateKm), sizeof(tElem));
+	if(L)
+		file.write((char*)&((Date -> CoefB)[0]), L * sizeof(tElem));
+	file.close();
+	return Correct_st;
+}

@@ -1,0 +1,141 @@
+//---------------------------------------------------------------------------
+
+#ifndef uMainH
+#define uMainH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.ComCtrls.hpp>
+#include <Vcl.Dialogs.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <Vcl.Grids.hpp>
+#include <Vcl.Menus.hpp>
+#include <Vcl.Samples.Spin.hpp>
+#include <VCLTee.Chart.hpp>
+#include <VclTee.TeeGDIPlus.hpp>
+#include <VCLTee.TeEngine.hpp>
+#include <VCLTee.TeeProcs.hpp>
+#include <VCLTee.Series.hpp>
+#include <ComObj.hpp>
+//---------------------------------------------------------------------------
+class TfMain : public TForm
+{
+__published:	// IDE-managed Components
+	TMainMenu* MainMenu;
+	TMenuItem* File;
+	TMenuItem* New;
+	TMenuItem* Open;
+	TMenuItem* Save;
+	TMenuItem* SaveAs;
+	TMenuItem* Exit;
+	TMenuItem* N1;
+	TSaveDialog* SaveFile;
+	TOpenDialog* OpenFile;
+	TPanel* Panel1;
+	TPanel* Panel2;
+	TStringGrid* stgCalcCost;
+	TStatusBar* StatusBar;
+	TButton* bCalc;
+	TButton* bAddCol;
+	TButton* bInsertCol;
+	TButton* bDelCol;
+	TEdit* edFixCost;
+	TEdit* edFreightRate;
+	TEdit* edTime;
+	TEdit* edQ;
+	TEdit* edCoefY;
+	TEdit* edVmax;
+	TEdit* edStep;
+	TEdit* edVmin;
+	TEdit* edTranspRateKm;
+	TEdit* edVarCost;
+	TEdit* edAverageL;
+	TLabel* Label1;
+	TLabel* Label2;
+	TLabel* Label3;
+	TLabel* Label4;
+	TLabel* Label5;
+	TLabel* Label6;
+	TLabel* Label7;
+	TLabel* Label8;
+	TLabel* Label9;
+	TLabel* Label10;
+	TLabel* Label11;
+	TPanel* pChart;
+	TCheckBox* cbAutoWidthCol;
+	TSpinEdit* spFontGrid;
+	TLabel* Label12;
+	TChart* Chart1;
+	TSpinEdit* edSpNumSym;
+	TLabel* Label13;
+	TMenuItem* Edit;
+	TMenuItem* Add;
+	TMenuItem* Insert;
+	TMenuItem* Delete;
+	TMenuItem* cases;
+	TMenuItem* Calc;
+	TMenuItem* SaveResult;
+	TSaveDialog* sdExcel;
+	TSplitter* Splitter;
+	TPanel* pGrid;
+	TPanel* pEditGrid;
+	TPanel* pAddOption;
+	TPanel* Panel3;
+	TCheckBox* cb3DChart;
+	void __fastcall stgCalcCostSelectCell(TObject* Sender, int ACol, int ARow, bool& CanSelect);
+	void __fastcall stgCalcCostMouseUp(TObject* Sender, TMouseButton Button, TShiftState Shift,
+		int X, int Y);
+	void __fastcall stgCalcCostMouseActivate(TObject* Sender, TMouseButton Button, TShiftState Shift,
+		int X, int Y, int HitTest, TMouseActivate& MouseActivate);
+	void __fastcall stgCalcCostKeyDown(TObject* Sender, WORD& Key, TShiftState Shift);
+	void __fastcall stgCalcCostGetEditText(TObject* Sender, int ACol, int ARow, UnicodeString& Value);
+	void __fastcall stgCalcCostExit(TObject* Sender);
+	void __fastcall bAddColClick(TObject* Sender);
+	void __fastcall bInsertColClick(TObject* Sender);
+	void __fastcall bDelColClick(TObject* Sender);
+	void __fastcall stgCalcCostDrawCell(TObject* Sender, int ACol, int ARow, TRect& Rect,
+		TGridDrawState State);
+	void __fastcall bCalcClick(TObject* Sender);
+	void __fastcall NewClick(TObject* Sender);
+	void __fastcall OpenClick(TObject* Sender);
+	void __fastcall SaveClick(TObject* Sender);
+	void __fastcall SaveAsClick(TObject* Sender);
+	void __fastcall ExitClick(TObject* Sender);
+	void __fastcall FormCloseQuery(TObject* Sender, bool& CanClose);
+	void __fastcall edChange(TObject* Sender);
+	void __fastcall stgCalcCostColumnMoved(TObject* Sender, int FromIndex, int ToIndex);
+	void __fastcall stgCalcCostDblClick(TObject* Sender);
+	void __fastcall cbAutoWidthColClick(TObject* Sender);
+	void __fastcall spEditKeyPress(TObject* Sender, System::WideChar& Key);
+	void __fastcall spFontGridChange(TObject* Sender);
+	void __fastcall CheckKeyPress(TObject* Sender, System::WideChar& Key);
+	void __fastcall SaveResultClick(TObject* Sender);
+	void __fastcall SplitterMoved(TObject* Sender);
+	void __fastcall FormResize(TObject* Sender);
+	void __fastcall cb3DChartClick(TObject* Sender);
+	void __fastcall edSpNumSymChange(TObject* Sender);
+	void __fastcall edExit(TObject* Sender);
+	void __fastcall edMouseActivate(TObject* Sender, TMouseButton Button, TShiftState Shift,
+		int X, int Y, int HitTest, TMouseActivate& MouseActivate);
+
+
+
+
+
+private:	// User declarations
+	String LastEdCell;
+	float fTotalWidth;
+	bool __fastcall CheckCHandSV();
+	bool __fastcall SaveState(bool ShDialog);
+	void __fastcall CheckCell(int Col, int Row, String TextCell, bool NotFix = true);
+	void __fastcall MyFixedCellClick(int ACol, int ARow);
+public:		// User declarations
+	__fastcall TfMain(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TfMain* fMain;
+//---------------------------------------------------------------------------
+#endif
+

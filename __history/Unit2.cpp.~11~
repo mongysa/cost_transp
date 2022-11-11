@@ -1,0 +1,64 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+#include <math.h>
+#include "Unit2.h"
+#include "Unit1.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm2 *Form2;
+const String S_PROCESS = L"Расчет себестоимости перевозки тонны груза";
+const String S_NONAME = L"<Безымянный>";
+const int  Min_Col_Width = 12;
+
+class TMyGrid : TStringGrid {
+	public:
+		using TStringGrid::MoveColumn;
+		using TStringGrid::DeleteColumn;
+};
+int CalcGridWidth(TStringGrid *Grid, int idxCol){
+	if(!Grid || idxCol < 0 || idxCol >= Grid -> ColCount)
+		return 0;
+	Grid -> Canvas -> Font -> Assign(Grid -> Font);
+	int max = 0;
+	for(int i = 0; i < Grid -> RowCount; i++){
+		int TextWidth = Grid -> Canvas -> TextWidth(Grid -> Cells[idxCol][i]);
+		if(TextWidth > max)
+			max = TextWidth;
+	}
+	return max + Min_Col_Width;
+}
+
+bool __fastcall TfMain::CheckCHandSV(){
+	if(Save -> Enabled){
+		String str;
+		if(!SaveFile -> FileName.IsEmpty())
+			str = SaveFile -> FileName;
+		else
+			str = S_NONAME;
+		switch(Application -> MessageBox((String(L"Сохранить изменения в \"")+str+L"\"?").w_str(),
+							  Application -> Title.w_str(),MB_YESNOCANCEL|MB_ICONQUESTION)){
+			case ID_YES:
+				return SaveState(SaveFile -> FileName.IsEmpty());
+			case ID_CANCEL:
+				return false;
+		}
+	}
+	return true;
+}
+
+//---------------------------------------------------------------------------
+__fastcall TForm2::TForm2(TComponent* Owner)
+	: TForm(Owner)
+{
+
+}
+//---------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------
+
+
+
+

@@ -1,0 +1,36 @@
+ //---------------------------------------------------------------------------
+
+#ifndef Unit1h
+#define Unit1h
+#include <vcl.h>
+typedef double tElem;
+typedef DynamicArray<tElem> Vec;
+typedef DynamicArray<DynamicArray<tElem> > Matr;
+
+enum Result{
+	Correct_st,
+	NotOpen_st,
+	IncorrFuncParams_st,
+	IncorrData_st,
+	ErrorAllocationDM_st,
+};
+struct CalcVar{
+	double varCost;
+	double fixCost;
+	double Q;
+	double CoefY;
+	double averageL;
+	double time;
+	double Vmin;
+	double Vmax;
+	double step;
+	double FreightRate;
+	double TranspRateKm;
+	Vec CoefB;
+};
+
+ void CalcCost(CalcVar *pStruct, Vec &Vmass, Matr &CalcMass);
+ Result LoadFrFile(String File, CalcVar *Date);
+ Result SaveToFile(String File, CalcVar *Date);
+//---------------------------------------------------------------------------
+#endif

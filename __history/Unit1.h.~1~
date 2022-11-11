@@ -1,0 +1,38 @@
+//---------------------------------------------------------------------------
+
+#ifndef Unit1H
+#define Unit1H
+#include <vcl.h>
+
+typedef double elem_type;
+typedef DynamicArray<elem_type> vec;
+typedef DynamicArray<DynamicArray<elem_type>> matr;
+
+enum cases{
+	good,
+	error_alloc,
+	error_func_znach,
+	error_data,
+	error_open,
+};
+
+struct calculations{
+	double cost_per_km;
+	double fixed_price;
+	double q;
+	double coeff_y;
+	double rub_k_t_km;
+	double time;
+	double v_min;
+	double v_max;
+	double v_step;
+	double summ_l;
+	double rub_k_tonn;
+	vec coeff_b;
+};
+
+ void calc_cost(calculations *calc, vec &v_mass, matr &calc_mass);
+ cases load_file(String file, calculations *calc);
+ cases save_to_file(String file, calculations *calc);
+//---------------------------------------------------------------------------
+#endif
