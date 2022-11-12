@@ -248,14 +248,12 @@ object Form2: TForm2
     Caption = 'input'
     ShowCaption = False
     TabOrder = 3
-    ExplicitLeft = 1
-    ExplicitTop = 293
     object Label1: TLabel
       Left = 1
       Top = 46
-      Width = 8
+      Width = 129
       Height = 16
-      Caption = 'C'
+      Caption = #1055#1077#1088#1077#1084'. '#1088#1072#1089#1093'('#1088#1091#1073'/'#1082#1084')='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -264,12 +262,12 @@ object Form2: TForm2
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 200
+      Left = 203
       Top = 15
-      Width = 11
+      Width = 61
       Height = 16
       Hint = #1056#1072#1089#1094#1077#1085#1082#1080' '#1085#1072' '#1087#1077#1088#1077#1074#1086#1079#1082#1091' '#1090#1086#1085#1085#1099' '#1075#1088#1091#1079#1072
-      Caption = #1056't'
+      Caption = #1056't('#1088#1091#1073'/'#1090')='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -280,10 +278,10 @@ object Form2: TForm2
     object Label4: TLabel
       Left = 199
       Top = 48
-      Width = 29
+      Width = 62
       Height = 16
       Hint = #1056#1072#1089#1094#1077#1085#1082#1080' '#1085#1072' '#1087#1077#1088#1077#1074#1086#1079#1082#1091' 1 '#1090'/'#1082#1084
-      Caption = 'Pt '#1082#1084
+      Caption = #1088#1091#1073'/'#1090'. '#1082#1084'='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -294,10 +292,10 @@ object Form2: TForm2
     object Label5: TLabel
       Left = 345
       Top = 15
-      Width = 7
+      Width = 16
       Height = 16
       Hint = #1050#1086#1101#1092#1092#1080#1094#1080#1077#1085#1090' '#1080#1089#1087#1086#1083#1100#1079#1086#1074#1072#1085#1080#1103' '#1087#1088#1086#1073#1077#1075#1072
-      Caption = 'Y'
+      Caption = 'Y='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -308,9 +306,9 @@ object Form2: TForm2
     object Label6: TLabel
       Left = 343
       Top = 48
-      Width = 9
+      Width = 18
       Height = 16
-      Caption = 'Q'
+      Caption = 'Q='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -347,9 +345,9 @@ object Form2: TForm2
     object Label9: TLabel
       Left = 440
       Top = 16
-      Width = 30
+      Width = 92
       Height = 16
-      Caption = 'V'#1084#1080#1085
+      Caption = 'V'#1084#1080#1085' ('#1082#1084'/'#1095#1072#1089')='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -360,9 +358,9 @@ object Form2: TForm2
     object Label10: TLabel
       Left = 586
       Top = 14
-      Width = 35
+      Width = 93
       Height = 16
-      Caption = 'V'#1084#1072#1082#1089
+      Caption = 'V'#1084#1072#1082#1089'('#1082#1084'/'#1095#1072#1089')='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -373,9 +371,9 @@ object Form2: TForm2
     object Label11: TLabel
       Left = 439
       Top = 48
-      Width = 84
+      Width = 129
       Height = 16
-      Caption = #1064#1072#1075' '#1089#1082#1086#1088#1086#1089#1090#1080' '
+      Caption = #1064#1072#1075' '#1089#1082#1086#1088#1086#1089#1090#1080' ('#1082#1084'/'#1095')='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -386,9 +384,9 @@ object Form2: TForm2
     object Label2: TLabel
       Left = 51
       Top = 16
-      Width = 8
+      Width = 48
       Height = 16
-      Caption = 'C'
+      Caption = #1088#1091#1073'/'#1082#1084'='
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -433,13 +431,14 @@ object Form2: TForm2
       Top = 46
       Width = 70
       Height = 21
+      Hint = #1043#1088#1091#1079#1086#1087#1086#1076#1098#1105#1084#1085#1086#1089#1090#1100' '#1087#1086#1076#1074#1080#1078#1085#1086#1075#1086' '#1089#1086#1089#1090#1072#1074#1072
       ParentShowHint = False
       ShowHint = True
       TabOrder = 5
     end
     object coeff_y: TEdit
       Left = 364
-      Top = 19
+      Top = 12
       Width = 70
       Height = 21
       Hint = #1050#1086#1101#1092#1092#1080#1094#1080#1077#1085#1090' '#1080#1089#1087#1086#1083#1100#1079#1086#1074#1072#1085#1080#1103' '#1087#1088#1086#1073#1077#1075#1072
@@ -459,7 +458,7 @@ object Form2: TForm2
     end
     object v_min: TEdit
       Left = 530
-      Top = 6
+      Top = 12
       Width = 50
       Height = 21
       Hint = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1072#1103' '#1089#1082#1086#1088#1086#1089#1090#1100
@@ -469,17 +468,17 @@ object Form2: TForm2
     end
     object rub_k_t_km: TEdit
       Left = 267
-      Top = 53
+      Top = 46
       Width = 70
       Height = 21
-      Hint = #1056#1072#1089#1094#1077#1085#1082#1080' '#1085#1072' '#1087#1077#1088#1074#1086#1079#1082#1091' 1 '#1090'/'#1082#1084
+      Hint = #1056#1072#1089#1094#1077#1085#1082#1080' '#1085#1072' '#1087#1077#1088#1077#1074#1086#1079#1082#1091' 1 '#1090'/'#1082#1084
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
     end
     object cost_per_km: TEdit
       Left = 123
-      Top = 53
+      Top = 45
       Width = 70
       Height = 21
       Hint = #1055#1077#1088#1077#1084#1077#1085#1085#1099#1077' '#1088#1072#1089#1093#1086#1076#1099' '#1085#1072' 1'#1082#1084' '#1087#1088#1086#1073#1077#1075#1072' ('#1090#1086#1087#1083#1080#1074#1086', '#1058#1054' '#1080' '#1090'.'#1076'.)'
